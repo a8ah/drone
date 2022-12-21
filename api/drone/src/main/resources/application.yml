@@ -1,0 +1,23 @@
+server:
+  port: 7500
+spring:
+  application.name: Musala-Dron_DEMO
+  profiles.active: dev
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mmZ
+  sql:
+    init:
+      platform: postgres
+      encoding: UTF-8
+  datasource:
+    url: jdbc:postgresql://192.168.0.13:5432/musala_drone
+    username: postgres
+    password: postgres
+  jpa:
+    show_sql: true
+    hibernate:
+      ddl-auto: validate #   update/validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        format_sql: true

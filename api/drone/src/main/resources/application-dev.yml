@@ -1,0 +1,28 @@
+server:
+  port: 7500
+spring:
+  sql:
+    init:
+      platform: postgres
+      encoding: UTF-8
+  datasource:
+    url: jdbc:postgresql://localhost:5432/musala_drone
+    username: postgres
+    password: postgres
+  jpa:
+    show_sql: true
+    hibernate:
+      ddl-auto: update #   update/validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        format_sql: true
+  devtools:
+    livereload:
+      enabled: true # Whether to enable a livereload.com-compatible server.
+      port: 35729 # Server port.
+    restart:
+      enabled: true # Whether to enable automatic restart.
+      exclude: META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties,META-INF/build-info.properties
+      poll-interval: 1s # Amount of time to wait between polling for classpath changes.
+      quiet-period: 400ms # Amount of quiet time required without any classpath changes before a restart is triggered.

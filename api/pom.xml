@@ -18,6 +18,12 @@
         <module>drone</module>
     </modules>
 
-	<dependencies></dependencies>
+	<dependencies>
+		<dependency>
+            <groupId>com.musala.drone</groupId>
+            <artifactId>data-domain</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+	</dependencies>
 
 </project>

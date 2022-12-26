@@ -1,7 +1,7 @@
 server:
   port: 7500
 spring:
-  application.name: Musala-Dron_DEMO
+  application.name: demo-Dron_DEMO
   profiles.active: dev
   jackson:
     date-format: yyyy-MM-dd'T'HH:mmZ
@@ -10,7 +10,7 @@ spring:
       platform: postgres
       encoding: UTF-8
   datasource:
-    url: jdbc:postgresql://192.168.0.13:5432/musala_drone
+    url: jdbc:postgresql://192.168.0.13:5432/demo_drone
     username: postgres
     password: postgres
   jpa:

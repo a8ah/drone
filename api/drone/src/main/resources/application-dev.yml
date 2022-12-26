@@ -6,7 +6,7 @@ spring:
       platform: postgres
       encoding: UTF-8
   datasource:
-    url: jdbc:postgresql://localhost:5432/musala_drone
+    url: jdbc:postgresql://localhost:5432/musala_dron
     username: postgres
     password: postgres
   jpa:

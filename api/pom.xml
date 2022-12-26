@@ -5,11 +5,11 @@
 
 	<parent>
 		<artifactId>drone-parent</artifactId>
-		<groupId>com.musala.drone</groupId>
+		<groupId>com.demo.drone</groupId>
 		<version>1.0.0</version>
 	</parent>
 
-	<groupId>com.musala.drone</groupId>
+	<groupId>com.demo.drone</groupId>
 	<artifactId>api</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
@@ -20,7 +20,7 @@
 
 	<dependencies>
 		<dependency>
-            <groupId>com.musala.drone</groupId>
+            <groupId>com.demo.drone</groupId>
             <artifactId>data-domain</artifactId>
             <version>1.0.0</version>
         </dependency>

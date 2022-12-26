@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 
 import com.demo.drone.data.common.model.DroneConstraintKey;
 
-public class DroneException extends Exception{
+public class DroneBaseException extends Exception{
 
     private String keyHash = "";
 
@@ -22,10 +22,10 @@ public class DroneException extends Exception{
     //Error Foreining Key Violation "Falta Llave Foranea"
     static String ER_FK_ENTRY = "23503"; //(23503); MySql (?)
 
-    public DroneException() {
+    public DroneBaseException() {
     }
 
-    public DroneException(String message) {
+    public DroneBaseException(String message) {
         super(message);
 
         if(null != message ) {
@@ -103,17 +103,17 @@ public class DroneException extends Exception{
                     String code = ((ConstraintViolationException) e.getCause()).getSQLException().getSQLState(); //Postgres
 
 
-                    if (code.equals(DroneException.ER_DUP_ENTRY)) {
+                    if (code.equals(DroneBaseException.ER_DUP_ENTRY)) {
 
                         return ErrorCode.ER_DUP_ENTRY;
                     }
 
-                    if (code.equals(DroneException.ER_NULL_ENTRY)) {
+                    if (code.equals(DroneBaseException.ER_NULL_ENTRY)) {
 
                         return ErrorCode.ER_NULL_ENTRY;
                     }
 
-                    if (code.equals(DroneException.ER_FK_ENTRY)) {
+                    if (code.equals(DroneBaseException.ER_FK_ENTRY)) {
 
                         return ErrorCode.ER_FK_ENTRY;
                     }

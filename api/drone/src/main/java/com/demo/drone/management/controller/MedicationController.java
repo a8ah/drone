@@ -1,7 +1,7 @@
 package com.demo.drone.management.controller;
 
 import com.demo.drone.data.common.controller.AbstractController;
-import com.demo.drone.data.common.exception.DroneException;
+import com.demo.drone.data.common.exception.DroneBaseException;
 import com.demo.drone.data.common.model.CustomMessages;
 import com.demo.drone.data.common.model.DroneConstraintKey;
 import com.demo.drone.data.common.tools.SuccessResponse;
@@ -50,18 +50,18 @@ public class MedicationController extends AbstractController {
         try {
             return new SuccessResponse(Boolean.TRUE, null, medicationProcess.registerMedication(entity));
         } catch (Exception ex) {
-            DroneConstraintKey key = DroneException.contraintKey(ex);
+            DroneConstraintKey key = DroneBaseException.contraintKey(ex);
             return SuccessResponse.fail(CustomMessages.message(key.toString()));
         }
     }
 
     @PutMapping("{id}")
     public SuccessResponse edit(@PathVariable String id, @RequestBody @Valid MedicationCreateDto entity)
-            throws DroneException {
+            throws DroneBaseException {
         try {
             return new SuccessResponse(Boolean.TRUE, null, medicationProcess.editMedication(id, entity));
         } catch (Exception ex) {
-            DroneConstraintKey key = DroneException.contraintKey(ex);
+            DroneConstraintKey key = DroneBaseException.contraintKey(ex);
             return SuccessResponse.fail(CustomMessages.message(key.toString()));
         }
 
@@ -73,7 +73,7 @@ public class MedicationController extends AbstractController {
             medicationProcess.deleteMedication(id);
             return new SuccessResponse(Boolean.TRUE, CustomMessages.message("MSMG001"), id);
         } catch (Exception ex) {
-            DroneConstraintKey key = DroneException.contraintKey(ex);
+            DroneConstraintKey key = DroneBaseException.contraintKey(ex);
             return SuccessResponse.fail(CustomMessages.message(key.toString()));
         }
     }

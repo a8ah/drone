@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.demo.drone.data.common.exception.DroneException;
+import com.demo.drone.data.common.exception.DroneBaseException;
 import com.demo.drone.data.management.business.MedicationBusiness;
 import com.demo.drone.data.management.entity.Medication;
 import com.demo.drone.data.management.execption.MedicationException;
@@ -42,7 +42,7 @@ public class MedicationProcess {
         return this.medicationBusiness.getMedication(uuid);
     }
 
-    public String editMedication(String uuid,MedicationCreateDto entity) throws DroneException{
+    public String editMedication(String uuid,MedicationCreateDto entity) throws DroneBaseException{
 
         Medication medication = new Medication();
         medication.setUuid(uuid);
@@ -54,7 +54,7 @@ public class MedicationProcess {
         return this.medicationBusiness.editMedication(uuid,medication);
     }
 
-    public void deleteMedication(String uuid) throws DroneException{
+    public void deleteMedication(String uuid) throws DroneBaseException{
 
         this.medicationBusiness.deleteMedication(uuid);
     }

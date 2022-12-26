@@ -1,8 +1,8 @@
 package com.demo.drone.data.management.execption;
 
-import com.demo.drone.data.common.exception.DroneException;
+import com.demo.drone.data.common.exception.DroneBaseException;
 
-public class MedicationException extends DroneException {
+public class MedicationException extends DroneBaseException {
 
     public MedicationException(String message)
     {

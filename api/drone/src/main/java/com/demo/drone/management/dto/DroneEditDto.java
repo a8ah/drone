@@ -24,7 +24,7 @@ public class DroneEditDto {
 
     @Min(value=0, message="must be equal or greater than 0")  
     @Max(value=100, message="must be equal or less than 100")  
-    private Integer batery;
+    private Integer battery;
 
     public String getSerial() {
         return serial;
@@ -50,11 +50,11 @@ public class DroneEditDto {
         this.weigth = weigth;
     }
 
-    public Integer getBatery() {
-        return batery;
+    public Integer getBattery() {
+        return battery;
     }
 
-    public void setBatery(Integer batery) {
-        this.batery = batery;
+    public void setBattery(Integer battery) {
+        this.battery = battery;
     }
 }

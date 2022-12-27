@@ -86,4 +86,21 @@ public class DroneController extends AbstractController {
         }
     }
 
+    @GetMapping("{uuid}/battery")
+    public SuccessResponse getDroneBattery(@PathVariable String uuid) throws Exception {
+        try {
+            return new SuccessResponse(Boolean.TRUE, null, droneProcess.getDroneBattery(uuid));
+        } catch (Exception ex) {
+            return SuccessResponse.fail(ex);
+        }
+    }
+
+    @GetMapping("availables")
+    public SuccessResponse getAvailableDrones() throws Exception {
+        try {
+            return new SuccessResponse(Boolean.TRUE, null, droneProcess.availablesDroneToDeliver());
+        } catch (Exception ex) {
+            return SuccessResponse.fail(ex);
+        }
+    }
 }

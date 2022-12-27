@@ -6,6 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.demo.drone.data.common.business.AbstractBusiness;
 import com.demo.drone.data.management.entity.Drone;
@@ -25,6 +29,7 @@ public class DroneBusiness extends AbstractBusiness {
     //     return this.droneService.getAllMedicationByEnabled(page, enabled);
     // }
 
+    @Transactional
     public String register(Drone droneInput) throws DroneException{
         Drone drone = new Drone();
 
@@ -32,7 +37,7 @@ public class DroneBusiness extends AbstractBusiness {
             throw DroneException.existBySerialException(droneInput.getSerial());
 
         drone.setSerial(droneInput.getSerial());
-        drone.setBatery(droneInput.getBatery());
+        drone.setBattery(droneInput.getBattery());
         drone.setWeigth(droneInput.getWeigth());
         drone.setState(droneInput.getState());
         drone.setModel(droneInput.getModel());
@@ -58,12 +63,13 @@ public class DroneBusiness extends AbstractBusiness {
         return drone;
     }
 
+    @Transactional
     public String edit(String uuid, Drone droneInput) throws DroneException{
         
         Drone drone = this.findByUuid(uuid);
 
         drone.setSerial(droneInput.getSerial());
-        drone.setBatery(droneInput.getBatery());
+        drone.setBattery(droneInput.getBattery());
         drone.setWeigth(droneInput.getWeigth());
         drone.setState(droneInput.getState());
         drone.setModel(droneInput.getModel());
@@ -73,6 +79,7 @@ public class DroneBusiness extends AbstractBusiness {
         return drone.getUuid();
     }
 
+    @Transactional
     public void delete(String uuid) throws DroneException{
         
         Drone drone = this.findByUuid(uuid);
@@ -88,5 +95,21 @@ public class DroneBusiness extends AbstractBusiness {
         drone.setState(new_state);
 
         this.droneService.saveAndFlush(drone);
+    }
+
+    public Integer getDroneBattery(String uuid) throws DroneException{
+
+        Drone drone = this.findByUuid(uuid);
+
+        return drone.getBattery();
+    }
+
+    public List<Drone> getAvailablesDroneToDeliver() throws DroneException{
+
+
+        List<State> states =new ArrayList<>();
+        states.add(State.IDLE);
+
+        return this.droneService.findAvailablesDrones(states,25);
     }
 }

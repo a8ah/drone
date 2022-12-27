@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 
 import com.demo.drone.data.common.business.AbstractBusiness;
 import com.demo.drone.data.management.entity.Medication;
@@ -25,6 +26,7 @@ public class MedicationBusiness extends AbstractBusiness {
         return this.medicationService.getAllMedicationByEnabled(page, enabled);
     }
 
+    @Transactional
     public String registerMedication(Medication medicationInput) throws MedicationException{
         Medication medication = new Medication();
 
@@ -57,6 +59,7 @@ public class MedicationBusiness extends AbstractBusiness {
         return medication;
     }
 
+    @Transactional
     public String editMedication(String uuid, Medication medicationInput) throws MedicationException{
         
         Medication medication = this.findByUuid(uuid);
@@ -71,6 +74,7 @@ public class MedicationBusiness extends AbstractBusiness {
         return medication.getUuid();
     }
 
+    @Transactional
     public void deleteMedication(String uuid) throws MedicationException{
         
         Medication medication = this.findByUuid(uuid);
@@ -78,5 +82,13 @@ public class MedicationBusiness extends AbstractBusiness {
         medication.setEnabled(Boolean.FALSE);
 
         this.medicationService.saveAndFlush(medication);
+    }
+
+    public Medication findByCode(String code) throws MedicationException{
+        Medication medication = this.medicationService.findByCode(code);
+
+        if(null == medication)
+            throw MedicationException.notExistByCodeException(code);
+        return medication;
     }
 }

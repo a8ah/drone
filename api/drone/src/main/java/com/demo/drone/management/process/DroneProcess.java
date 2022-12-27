@@ -3,6 +3,8 @@ package com.demo.drone.management.process;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import com.demo.drone.data.common.exception.DroneBaseException;
 import com.demo.drone.data.management.business.DroneBusiness;
 import com.demo.drone.data.management.entity.Drone;
@@ -48,7 +50,7 @@ public class DroneProcess {
         drone.setSerial(entity.getSerial());
         drone.setModel(model);
         drone.setWeigth(entity.getWeigth());
-        drone.setBatery(entity.getBatery());
+        drone.setBattery(entity.getBattery());
 
         return this.droneBusiness.edit(uuid,drone);
     }
@@ -66,5 +68,12 @@ public class DroneProcess {
         this.droneBusiness.changeState(uuid,state);
     }
 
+    public Integer getDroneBattery(String uuid) throws DroneException{
+        return this.droneBusiness.getDroneBattery(uuid);
+    }
+
+    public List<Drone> availablesDroneToDeliver() throws DroneException{
+        return this.droneBusiness.getAvailablesDroneToDeliver();
+    }
 
 }

@@ -13,4 +13,6 @@ public interface MedicationRepository extends EntityRepository<Medication, Strin
     Medication findByUuidAndEnabled(String uuid, Boolean enabled);
 
     Boolean existsByCode(String code); 
+
+    Medication findByCode(String code);
 }

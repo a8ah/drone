@@ -33,12 +33,12 @@ public class MedicationException extends DroneBaseException {
         return new MedicationException(message);
     }
 
-    // public static MedicationException existByCurpInCohorthException(String curp)
-    // {
+    public static MedicationException notExistByCodeException(String code)
+    {
 
-    //     String message = "Ya existe un prospecto con la CURP " + curp  + " en esta Campaña";
+        String message = "Medication with code " + code  + " not registred";
 
-    //     return new MedicationException(message);
-    // }
+        return new MedicationException(message);
+    }
 
 }

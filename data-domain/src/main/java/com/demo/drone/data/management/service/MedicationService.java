@@ -31,4 +31,8 @@ public class MedicationService extends AbstractEntityService<Medication, String,
     public Boolean existsByCode(String code){
         return this.repository.existsByCode(code);
     }
+
+    public Medication findByCode(String code){
+        return this.repository.findByCode(code);
+    }
 }

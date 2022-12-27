@@ -1,46 +1,43 @@
-package com.demo.drone.data.management.entity;
+package com.demo.drone.data.cargo.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
+import com.demo.drone.data.cargo.model.OrderState;
 import com.demo.drone.data.common.domain.FieldConstrain;
+import com.demo.drone.data.common.model.annotation.GeneratedCode;
 import com.demo.drone.data.common.repository.SCHEMAS;
-import com.demo.drone.data.management.model.Model;
-import com.demo.drone.data.management.model.State;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table( schema = SCHEMAS.drone,
-        uniqueConstraints = { @UniqueConstraint(name = "UKMG002", columnNames = {"serial"})}
+@Table( schema = SCHEMAS.cargo
     )
-public class Drone implements Serializable {
+public class Order implements Serializable {
 
     @Id
     @Column(length = FieldConstrain.UUID)
     protected String uuid;
 
-    @Column(nullable = false)
-    private String serial;
+    @GeneratedCode(length = 7)
+    @Column(nullable = false, unique = true)
+    protected String code;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    private Set<OrderMedication> medications;
+
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected Model model;
-
-    @Enumerated(EnumType.STRING)
-    protected State state = State.IDLE;
+    protected OrderState state = OrderState.PENDING;
 
     @Column(nullable = false)
-    private Double weigth;
-
-    @Column(nullable = false)
-    private Integer battery = 0 ;
+    private Double weigth = 0.0;
 
     protected LocalDateTime lastUpdate;
 
     protected LocalDateTime createdAt;
-
 
     @Column(nullable = false)
     protected Boolean enabled = true;
@@ -85,7 +82,7 @@ public class Drone implements Serializable {
         this.enabled = enabled;
     }  
 
-    public Drone() {
+    public Order() {
         this.uuid = UUID.randomUUID().toString();
         this.lastUpdate = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
@@ -96,35 +93,28 @@ public class Drone implements Serializable {
         this.lastUpdate = LocalDateTime.now();
     }
 
-    public String getSerial() {
-        return serial;
+    public String getCode() {
+        return code;
     }
 
-    public void setSerial(String serial) {
-        this.serial = serial;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public Model getModel() {
-        return model;
+    public Set<OrderMedication> getMedications() {
+        return medications;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
-    }
-
-    public State getState() {
+    public OrderState getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(OrderState state) {
         this.state = state;
     }
 
-    public Integer getBattery() {
-        return battery;
+    public void setMedications(Set<OrderMedication> medications) {
+        this.medications = medications;
     }
 
-    public void setBattery(Integer battery) {
-        this.battery = battery;
-    }
 }

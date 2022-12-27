@@ -43,6 +43,10 @@ public class CustomMessages {
             case "MSMG005":
                 return "Drone edited";
 
+            // ------------ Cargo ----------------
+            case "MSCA001":
+                return "Order registred";
+
         }
 
         return "";

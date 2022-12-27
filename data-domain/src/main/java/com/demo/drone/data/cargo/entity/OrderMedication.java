@@ -1,41 +1,38 @@
-package com.demo.drone.data.management.entity;
+package com.demo.drone.data.cargo.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.demo.drone.data.cargo.model.OrderState;
 import com.demo.drone.data.common.domain.FieldConstrain;
 import com.demo.drone.data.common.repository.SCHEMAS;
-import com.demo.drone.data.management.model.Model;
-import com.demo.drone.data.management.model.State;
+import com.demo.drone.data.management.entity.Medication;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table( schema = SCHEMAS.drone,
-        uniqueConstraints = { @UniqueConstraint(name = "UKMG002", columnNames = {"serial"})}
+@Table( schema = SCHEMAS.cargo
     )
-public class Drone implements Serializable {
+public class OrderMedication implements Serializable {
 
     @Id
     @Column(length = FieldConstrain.UUID)
     protected String uuid;
 
     @Column(nullable = false)
-    private String serial;
+    private Integer quantity;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected Model model;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    protected Medication medication; 
 
-    @Enumerated(EnumType.STRING)
-    protected State state = State.IDLE;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    protected Order order;
 
     @Column(nullable = false)
     private Double weigth;
-
-    @Column(nullable = false)
-    private Integer battery = 0 ;
 
     protected LocalDateTime lastUpdate;
 
@@ -85,7 +82,7 @@ public class Drone implements Serializable {
         this.enabled = enabled;
     }  
 
-    public Drone() {
+    public OrderMedication() {
         this.uuid = UUID.randomUUID().toString();
         this.lastUpdate = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
@@ -96,35 +93,28 @@ public class Drone implements Serializable {
         this.lastUpdate = LocalDateTime.now();
     }
 
-    public String getSerial() {
-        return serial;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setSerial(String serial) {
-        this.serial = serial;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public Model getModel() {
-        return model;
+    public Medication getMedication() {
+        return medication;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setMedication(Medication medication) {
+        this.medication = medication;
     }
 
-    public State getState() {
-        return state;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Integer getBattery() {
-        return battery;
-    }
-
-    public void setBattery(Integer battery) {
-        this.battery = battery;
-    }
 }

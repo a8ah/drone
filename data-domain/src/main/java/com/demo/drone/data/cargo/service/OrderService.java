@@ -61,9 +61,9 @@ public class OrderService extends AbstractEntityService<Order, String, OrderRepo
         }
     }
 
-    // public Drone findByUuid(String uuid){
-    //     return this.repository.findByUuid(uuid);
-    // }
+    public Order findByUuid(String uuid){
+        return this.repository.findByUuid(uuid);
+    }
 
     // public Drone getDrone(String uuid, Boolean enabled){
     //     return this.repository.findByUuidAndEnabled(uuid, enabled);

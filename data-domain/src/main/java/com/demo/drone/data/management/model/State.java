@@ -20,7 +20,7 @@ public enum State {
         switch (this.name()){
 
             case "IDLE":
-                return "Out of service";
+                return "Idle";
 
             case "LOADING":
                 return "Loading products";

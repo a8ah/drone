@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.demo.drone.data.cargo.entity.Order;
 import com.demo.drone.data.cargo.entity.OrderMedication;
+import com.demo.drone.data.cargo.execption.OrderException;
 import com.demo.drone.data.cargo.request.MedicationOrderRequest;
 import com.demo.drone.data.cargo.service.OrderMedicationService;
 import com.demo.drone.data.cargo.service.OrderService;
@@ -85,13 +86,21 @@ public class OrderBusiness extends AbstractBusiness {
         return order.getUuid();
     }
 
-    // public Medication findByUuid(String uuid) throws MedicationException{
-    //     Medication medication = this.medicationService.findByUuid(uuid);
+    public Order getOrder(String uuid) throws MedicationException, OrderException{
+        Order order = this.orderService.findByUuid(uuid);
 
-    //     if(null == medication)
-    //         throw MedicationException.medicationNoExist(uuid);
-    //     return medication;
-    // }
+        if(null == order)
+            throw OrderException.orderNoExist(uuid);
+        return order;
+    }
+
+    @Transactional
+    public void save(Order order) {
+
+        this.orderService.saveAndFlush(order);
+
+    }
+
 
     // public Medication getMedication(String uuid) throws MedicationException{
     //     Medication medication = this.medicationService.getMedication(uuid, Boolean.TRUE);

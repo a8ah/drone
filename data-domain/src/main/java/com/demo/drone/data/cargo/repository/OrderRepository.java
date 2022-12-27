@@ -8,9 +8,9 @@ import com.demo.drone.data.common.repository.EntityRepository;
 @Repository
 public interface OrderRepository extends EntityRepository<Order, String>, OrderRepositoryCustom {
 
-    // Drone findByUuid(String uuid);
+    Order findByUuid(String uuid);
 
-    // Drone findByUuidAndEnabled(String uuid, Boolean enabled);
+    Order findByUuidAndEnabled(String uuid, Boolean enabled);
 
-    // Boolean existsBySerial(String serial); 
+    Boolean existsByCode(String code); 
 }

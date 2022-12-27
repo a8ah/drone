@@ -1,7 +1,9 @@
 package com.demo.drone.cargo.controller;
 
+import java.util.List;
 import java.util.Map;
 
+import com.demo.drone.cargo.process.LoadProcess;
 import com.demo.drone.cargo.process.OrderProcess;
 import com.demo.drone.data.common.controller.AbstractController;
 import com.demo.drone.data.common.exception.DroneBaseException;
@@ -16,36 +18,17 @@ import org.springframework.web.bind.annotation.*;
  * @author alfredo
  */
 @RestController
-@RequestMapping("cargo/order")
-public class OrderController extends AbstractController {
+@RequestMapping("cargo/load")
+public class LoadController extends AbstractController {
 
     @Autowired
-    OrderProcess orderProcess;
+    LoadProcess loadProcess;
 
-    @GetMapping("{uuid}")
-    public SuccessResponse details(@PathVariable String uuid) throws Exception {
+    @PostMapping("{uuid}")
+    public SuccessResponse loadCargoToDrone(@PathVariable String uuid, @RequestBody  Map<String,Object> entity) throws Exception {
         try {
-            return new SuccessResponse(Boolean.TRUE, null, orderProcess.getOrder(uuid));
-        } catch (Exception ex) {
-            return SuccessResponse.fail(ex);
-        }
-    }
-
-    // @PostMapping("search_enabled")
-    // public SuccessResponse search(@RequestParam(required = false, defaultValue = "0") Integer page,
-    //         @RequestParam(required = false, defaultValue = "10") Integer size) {
-    //     try {
-    //         Page<MedicationProjection> medicatios = medicationProcess.getAllEnabledMedication(page, size);
-    //         return new SuccessResponse(Boolean.TRUE, null, medicatios);
-    //     } catch (Exception ex) {
-    //         return SuccessResponse.fail(ex);
-    //     }
-    // }
-
-    @PostMapping
-    public SuccessResponse create(@RequestBody  Map<String,Object> entity) throws Exception {
-        try {
-            return new SuccessResponse(Boolean.TRUE, CustomMessages.message("MSCA001"),orderProcess.register(entity));
+            loadProcess.load(uuid,entity);
+            return new SuccessResponse(Boolean.TRUE, CustomMessages.message("MSCA002"),null);
         } catch (Exception ex) {
             DroneConstraintKey key = DroneBaseException.contraintKey(ex);
             if(key != DroneConstraintKey.UK00000)

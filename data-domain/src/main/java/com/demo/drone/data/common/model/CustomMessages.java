@@ -47,6 +47,9 @@ public class CustomMessages {
             case "MSCA001":
                 return "Order registred";
 
+            case "MSCA002":
+                return "Drone loading cargo...";
+
         }
 
         return "";

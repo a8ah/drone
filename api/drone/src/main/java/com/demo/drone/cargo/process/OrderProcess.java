@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.demo.drone.data.cargo.business.OrderBusiness;
+import com.demo.drone.data.cargo.entity.Order;
 import com.demo.drone.data.cargo.entity.OrderMedication;
+import com.demo.drone.data.cargo.execption.OrderException;
 import com.demo.drone.data.cargo.request.MedicationOrderRequest;
 import com.demo.drone.data.management.execption.MedicationException;
 
@@ -40,10 +42,10 @@ public class OrderProcess {
 
     }
 
-    // public Drone getDrone(String uuid) throws DroneException{
+    public Order getOrder(String uuid) throws MedicationException, OrderException{
 
-    //     return this.droneBusiness.getDrone(uuid);
-    // }
+        return this.orderBusiness.getOrder(uuid);
+    }
 
     // public String editDrone(String uuid,DroneEditDto entity) throws DroneBaseException{
 

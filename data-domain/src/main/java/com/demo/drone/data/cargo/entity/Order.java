@@ -120,4 +120,12 @@ public class Order implements Serializable {
         this.medications = medications;
     }
 
+    public Drone getDrone() {
+        return drone;
+    }
+
+    public void setDrone(Drone drone) {
+        this.drone = drone;
+    }
+
 }

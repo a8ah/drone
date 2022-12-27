@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("tacking/order_history")
-public class OrderController extends AbstractController {
+public class OrderHistoryController extends AbstractController {
 
     @Autowired
     OrderHistoryProcess orderHistoryProcess;

@@ -9,6 +9,7 @@ import com.demo.drone.data.cargo.model.OrderState;
 import com.demo.drone.data.common.domain.FieldConstrain;
 import com.demo.drone.data.common.model.annotation.GeneratedCode;
 import com.demo.drone.data.common.repository.SCHEMAS;
+import com.demo.drone.data.management.entity.Drone;
 
 import jakarta.persistence.*;
 
@@ -28,6 +29,8 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<OrderMedication> medications;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    protected Drone drone;
 
     @Enumerated(EnumType.STRING)
     protected OrderState state = OrderState.PENDING;

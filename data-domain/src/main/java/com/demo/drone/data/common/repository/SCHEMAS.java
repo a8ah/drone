@@ -5,4 +5,5 @@ public abstract class SCHEMAS {
   public static final String drone = "drone";
   public static final String medication = "medication";
   public static final String cargo = "cargo";
+  public static final String traking = "traking";
 }

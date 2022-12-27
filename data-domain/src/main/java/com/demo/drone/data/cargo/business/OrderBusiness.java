@@ -8,11 +8,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.demo.drone.data.cargo.entity.Order;
 import com.demo.drone.data.cargo.entity.OrderMedication;
@@ -24,6 +20,8 @@ import com.demo.drone.data.common.model.annotation.GeneratedCode;
 import com.demo.drone.data.management.business.MedicationBusiness;
 import com.demo.drone.data.management.entity.Medication;
 import com.demo.drone.data.management.execption.MedicationException;
+import com.demo.drone.data.tracking.model.OrderHistory;
+import com.demo.drone.data.tracking.service.OrderHistoryService;
 
 
 @Service
@@ -37,6 +35,9 @@ public class OrderBusiness extends AbstractBusiness {
 
     @Autowired
     private OrderMedicationService orderMedicationService;
+
+    @Autowired
+    private OrderHistoryService orderHistoryService;
 
     // public Page<MedicationProjection> getAllMedicationByEnabled(PageRequest page, Boolean enabled ){
         
@@ -73,6 +74,13 @@ public class OrderBusiness extends AbstractBusiness {
         order.setWeigth(totalWeigth);
 
         this.orderService.saveAndFlush(order);
+
+        // register OrderHistory
+        OrderHistory orderHistory = new OrderHistory();
+        orderHistory.setState(order.getState());
+        orderHistory.setOrder(order);
+
+        this.orderHistoryService.saveAndFlush(orderHistory);
 
         return order.getUuid();
     }

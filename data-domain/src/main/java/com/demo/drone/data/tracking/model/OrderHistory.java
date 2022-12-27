@@ -1,61 +1,49 @@
-package com.demo.drone.data.management.entity;
+package com.demo.drone.data.tracking.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.UUID;
 
 import com.demo.drone.data.cargo.entity.Order;
+import com.demo.drone.data.cargo.model.OrderState;
 import com.demo.drone.data.common.domain.FieldConstrain;
 import com.demo.drone.data.common.repository.SCHEMAS;
-import com.demo.drone.data.management.model.Model;
-import com.demo.drone.data.management.model.State;
+import com.demo.drone.data.management.entity.Drone;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
 @Entity
-@Table( schema = SCHEMAS.drone,
-        uniqueConstraints = { @UniqueConstraint(name = "UKMG002", columnNames = {"serial"})}
-    )
-public class Drone implements Serializable {
+@Table( schema = SCHEMAS.traking )
+public class OrderHistory implements Serializable {
 
     @Id
     @Column(length = FieldConstrain.UUID)
     protected String uuid;
 
-    @Column(nullable = false)
-    private String serial;
+    @ManyToOne(fetch = FetchType.LAZY)
+    protected Drone drone;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    protected Order order;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected Model model;
+    protected OrderState state;
 
-    @Enumerated(EnumType.STRING)
-    protected State state = State.IDLE;
-
-    @Column(nullable = false)
-    private Double weigth;
-
-    @Column(nullable = false)
-    private Integer battery = 0 ;
 
     protected LocalDateTime lastUpdate;
 
     protected LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "drone", fetch = FetchType.LAZY)
-    private Set<Order> orders;
-
     @Column(nullable = false)
     protected Boolean enabled = true;
-
-    public Double getWeigth() {
-        return weigth;
-    }
-
-    public void setWeigth(Double weigth) {
-        this.weigth = weigth;
-    }
 
     public String getUuid() {
         return uuid;
@@ -89,7 +77,7 @@ public class Drone implements Serializable {
         this.enabled = enabled;
     }  
 
-    public Drone() {
+    public OrderHistory() {
         this.uuid = UUID.randomUUID().toString();
         this.lastUpdate = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
@@ -100,35 +88,27 @@ public class Drone implements Serializable {
         this.lastUpdate = LocalDateTime.now();
     }
 
-    public String getSerial() {
-        return serial;
+    public Drone getDrone() {
+        return drone;
     }
 
-    public void setSerial(String serial) {
-        this.serial = serial;
+    public void setDrone(Drone drone) {
+        this.drone = drone;
     }
 
-    public Model getModel() {
-        return model;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public State getState() {
+    public OrderState getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(OrderState state) {
         this.state = state;
-    }
-
-    public Integer getBattery() {
-        return battery;
-    }
-
-    public void setBattery(Integer battery) {
-        this.battery = battery;
     }
 }

@@ -3,6 +3,7 @@ package com.demo.drone.management.dto;
 import com.demo.drone.data.common.validators.medication.MedicationCode;
 import com.demo.drone.data.common.validators.medication.MedicationName;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -12,7 +13,6 @@ public class MedicationCreateDto {
     @Size(min = 2, max = 15)
     @MedicationName
     private String name;
-    
     @NotNull(message = "The item code is required!")
     @MedicationCode
     private String code;

@@ -6,6 +6,7 @@ public enum DroneConstraintKey {
 
     //Management
     UKMG001, //Medication code unique
+    UKMG002, //Drone serial unique
 
     //Cargo
 

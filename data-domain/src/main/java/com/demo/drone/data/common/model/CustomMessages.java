@@ -19,9 +19,29 @@ public class CustomMessages {
             case "UKMG001":
                 return "A medication with this code allready exist";
 
-            //Management Medication Delete
+            case "UKMG002":
+                return "A drone with this serial allready exist";
+
+            //------------------- Management --------------------------
+            // Medication Delete
             case "MSMG001":
                 return "Medication successfully deleted";
+
+            //Drone Delete
+            case "MSMG002":
+                return "Drone successfully deleted";
+
+            //Drone Delete
+            case "MSMG003":
+                return "Drone STATE updated";
+
+            //Drone Register
+            case "MSMG004":
+                return "Drone registred";
+
+            //Drone Edited
+            case "MSMG005":
+                return "Drone edited";
 
         }
 

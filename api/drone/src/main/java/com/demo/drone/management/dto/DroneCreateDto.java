@@ -6,6 +6,8 @@ import com.demo.drone.data.management.model.Model;
 
 import org.hibernate.validator.constraints.Length;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public class DroneCreateDto {
@@ -15,10 +17,11 @@ public class DroneCreateDto {
     @DroneSerial
     private String serial;
 
-    // @EnumModel
     private String model;
 
     @NotNull(message = "The item weigth is required!")
+    @Min(value = 1, message="must be equal or greater than 1g")
+    @Max(value = 500, message="must be equal or less than 500g")
     private Double weigth;
 
     public String getSerial() {

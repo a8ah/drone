@@ -131,4 +131,12 @@ public class Drone implements Serializable {
     public void setBattery(Integer battery) {
         this.battery = battery;
     }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 }

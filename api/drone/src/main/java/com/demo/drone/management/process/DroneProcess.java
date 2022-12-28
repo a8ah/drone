@@ -3,14 +3,20 @@ package com.demo.drone.management.process;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import com.demo.drone.data.cargo.entity.Order;
+import com.demo.drone.data.cargo.entity.OrderMedication;
 import com.demo.drone.data.common.exception.DroneBaseException;
 import com.demo.drone.data.management.business.DroneBusiness;
 import com.demo.drone.data.management.entity.Drone;
 import com.demo.drone.data.management.execption.DroneException;
 import com.demo.drone.data.management.model.Model;
 import com.demo.drone.data.management.model.State;
+import com.demo.drone.data.management.projection.OrderMedicationCheckProjection;
+import com.demo.drone.data.management.projection.OrderMedicationProjection;
 import com.demo.drone.management.dto.DroneCreateDto;
 import com.demo.drone.management.dto.DroneEditDto;
 
@@ -76,4 +82,29 @@ public class DroneProcess {
         return this.droneBusiness.getAvailablesDroneToDeliver();
     }
 
+    public List<OrderMedicationCheckProjection> checkingLoadedMedication(String uuid) throws DroneException{
+        Set<Order> ordersSet =  this.droneBusiness.checkingLoadedMedication(uuid);
+    
+        List<OrderMedicationCheckProjection> orderMedicationCheck = new ArrayList();
+
+        for (Order order : ordersSet) {
+            OrderMedicationCheckProjection orderMedicationCheckProjection = new OrderMedicationCheckProjection();
+            Set<OrderMedication> ordermedicationSet = order.getMedications();
+            List<OrderMedicationProjection> ordermedicationList = new ArrayList<>();
+            for (OrderMedication oMedication : ordermedicationSet) {
+                OrderMedicationProjection orderMedicationProjection = new OrderMedicationProjection();
+                orderMedicationProjection.setMedication(oMedication.getMedication().getName());
+                orderMedicationProjection.setQuantity(oMedication.getQuantity());
+                ordermedicationList.add(orderMedicationProjection);
+            }
+            orderMedicationCheckProjection.setMedicationName(ordermedicationList);
+            orderMedicationCheckProjection.setWeigth(order.getWeigth());
+            orderMedicationCheckProjection.setUuid(order.getUuid());
+            orderMedicationCheckProjection.setCode(order.getCode());
+
+            orderMedicationCheck.add(orderMedicationCheckProjection);
+        }
+
+        return orderMedicationCheck;
+    }
 }

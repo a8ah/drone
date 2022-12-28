@@ -51,4 +51,12 @@ public class DroneException extends DroneBaseException {
         return new DroneException(message);
     }
 
+    public static DroneException operationUnavailableException()
+    {
+
+        String message = "Operation unavailable for a gived Drone.";
+
+        return new DroneException(message);
+    }
+
 }

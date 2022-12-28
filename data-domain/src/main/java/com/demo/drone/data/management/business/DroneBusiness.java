@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import com.demo.drone.data.cargo.business.OrderBusiness;
 import com.demo.drone.data.cargo.entity.Order;
+import com.demo.drone.data.cargo.entity.OrderMedication;
 import com.demo.drone.data.cargo.execption.OrderException;
 import com.demo.drone.data.cargo.model.OrderState;
 import com.demo.drone.data.common.business.AbstractBusiness;
@@ -21,6 +24,7 @@ import com.demo.drone.data.management.entity.Drone;
 import com.demo.drone.data.management.execption.DroneException;
 import com.demo.drone.data.management.execption.MedicationException;
 import com.demo.drone.data.management.model.State;
+import com.demo.drone.data.management.projection.OrderMedicationCheckProjection;
 import com.demo.drone.data.management.service.DroneService;
 
 
@@ -143,15 +147,24 @@ public class DroneBusiness extends AbstractBusiness {
 
             if(partialWeigth> drone.getWeigth())
                 throw DroneException.cargoWeigthException(drone.getWeigth(), partialWeigth );
-            
+
             order.setDrone(drone);
             order.setState(OrderState.LOADING);
             this.orderBusiness.save(order);
-
         }
 
         drone.setState(State.LOADING);
         this.droneService.saveAndFlush(drone);
     }
 
+    public Set<Order> checkingLoadedMedication(String uuid) throws DroneException{
+        Drone drone = this.findByUuid(uuid);
+
+        List list = Arrays.asList(new State[]{State.LOADING,State.LOADED,State.DELIVERING,State.DELIVERED});
+        if (!list.contains(drone.getState()))
+            throw DroneException.operationUnavailableException();
+        
+        return drone.getOrders();
+
+    }
 }

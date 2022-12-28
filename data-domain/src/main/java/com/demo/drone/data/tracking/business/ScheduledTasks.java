@@ -10,6 +10,7 @@ import com.demo.drone.data.tracking.model.DroneBatteryHistory;
 import com.demo.drone.data.tracking.service.DroneBatteryHistoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,6 +26,7 @@ public class ScheduledTasks {
     @Autowired
     DroneBatteryHistoryService droneBatteryHistoryService;
 
+    
     private void registerDroneBattery(){
 
         List<Drone> dorneList = this.droneBusiness.getAllDrones();
@@ -43,7 +45,7 @@ public class ScheduledTasks {
         System.out.println("Drones Battery checked at  "+ LocalDateTime.now());
     }
     
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRateString = "${scheduled_tasks.battery.time}")
     public void computePrice() throws InterruptedException {
     
         this.registerDroneBattery();

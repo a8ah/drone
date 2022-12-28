@@ -25,3 +25,7 @@ spring:
 drone:
   battery:
     minialAvailable: 25
+
+scheduled_tasks:
+  battery:
+    time: 300000

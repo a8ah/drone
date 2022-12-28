@@ -45,6 +45,10 @@ public class DroneBusiness extends AbstractBusiness {
     //     return this.droneService.getAllMedicationByEnabled(page, enabled);
     // }
 
+    public List<Drone> getAllDrones(){
+        return this.droneService.findAll();
+    }
+
     @Transactional
     public String register(Drone droneInput) throws DroneException{
         Drone drone = new Drone();

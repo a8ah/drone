@@ -15,6 +15,7 @@ import com.demo.drone.data.management.entity.Drone;
 import com.demo.drone.data.management.execption.DroneException;
 import com.demo.drone.data.management.model.Model;
 import com.demo.drone.data.management.model.State;
+import com.demo.drone.data.management.projection.DroneProjection;
 import com.demo.drone.data.management.projection.OrderMedicationCheckProjection;
 import com.demo.drone.data.management.projection.OrderMedicationProjection;
 import com.demo.drone.management.dto.DroneCreateDto;
@@ -26,6 +27,19 @@ public class DroneProcess {
 
     @Autowired
     private DroneBusiness droneBusiness;
+
+    public List<DroneProjection> getEnabledDrones(){
+        List<Drone>  doneList = this.droneBusiness.getAllDroneByEnabled(Boolean.TRUE);
+
+        List<DroneProjection> resultList = new ArrayList<>();
+
+        for (Drone drone : doneList) {
+            DroneProjection droneProjection = new DroneProjection(drone);
+            resultList.add(droneProjection);
+        }
+
+        return resultList;
+    }
 
     public String registerDrone(DroneCreateDto entity) throws DroneBaseException{
 

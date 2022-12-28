@@ -15,6 +15,8 @@ public interface DroneRepository extends EntityRepository<Drone, String>, Medica
 
     Drone findByUuidAndEnabled(String uuid, Boolean enabled);
 
+    List<Drone> findAllByEnabled(Boolean enabled);
+
     Boolean existsBySerial(String serial); 
 
     Integer getBatteryByUuid(String uuid);

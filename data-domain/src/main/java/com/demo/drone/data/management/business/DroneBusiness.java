@@ -40,10 +40,10 @@ public class DroneBusiness extends AbstractBusiness {
     @Value("${drone.battery.minialAvailable}")
     private Integer minialAvailable;
 
-    // public Page<MedicationProjection> getAllMedicationByEnabled(PageRequest page, Boolean enabled ){
+    public List<Drone> getAllDroneByEnabled(Boolean enabled ){
         
-    //     return this.droneService.getAllMedicationByEnabled(page, enabled);
-    // }
+        return this.droneService.findAllByEnabled(enabled);
+    }
 
     public List<Drone> getAllDrones(){
         return this.droneService.findAll();

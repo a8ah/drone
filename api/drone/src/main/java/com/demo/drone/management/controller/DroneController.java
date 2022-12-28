@@ -34,6 +34,15 @@ public class DroneController extends AbstractController {
         }
     }
 
+    @GetMapping("enabled")
+    public SuccessResponse getenabledDrones() throws Exception {
+        try {
+            return new SuccessResponse(Boolean.TRUE, null, droneProcess.getEnabledDrones());
+        } catch (Exception ex) {
+            return SuccessResponse.fail(ex);
+        }
+    }
+
     @PostMapping
     public SuccessResponse create(@RequestBody @Valid DroneCreateDto entity) throws Exception {
         try {

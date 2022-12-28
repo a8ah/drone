@@ -36,4 +36,8 @@ public class DroneService extends AbstractEntityService<Drone, String, DroneRepo
     public List<Drone> findAvailablesDrones(List<State> states,Integer batteryWarning){
         return this.repository.findByStateInAndBatteryGreaterThanEqual(states,batteryWarning);
     }
+
+    public List<Drone> findAllByEnabled(Boolean enabled){
+        return this.repository.findAllByEnabled(enabled);
+    }
 }

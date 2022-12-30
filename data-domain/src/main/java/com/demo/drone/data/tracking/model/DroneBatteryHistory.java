@@ -28,7 +28,8 @@ public class DroneBatteryHistory implements Serializable {
 
     protected String droneSerial;
 
-    protected Integer battery;
+    @Column(nullable = false)
+    private Integer battery;
 
     @Enumerated(EnumType.STRING)
     protected OrderState state;

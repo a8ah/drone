@@ -37,27 +37,4 @@ public class LoadController extends AbstractController {
         }
     }
 
-    // @PutMapping("{id}")
-    // public SuccessResponse edit(@PathVariable String id, @RequestBody @Valid MedicationCreateDto entity)
-    //         throws DroneBaseException {
-    //     try {
-    //         return new SuccessResponse(Boolean.TRUE, null, medicationProcess.editMedication(id, entity));
-    //     } catch (Exception ex) {
-    //         DroneConstraintKey key = DroneBaseException.contraintKey(ex);
-    //         return SuccessResponse.fail(CustomMessages.message(key.toString()));
-    //     }
-
-    // }
-
-    // @DeleteMapping("{id}")
-    // public SuccessResponse delete(@PathVariable String id) throws Exception {
-    //     try {
-    //         medicationProcess.deleteMedication(id);
-    //         return new SuccessResponse(Boolean.TRUE, CustomMessages.message("MSMG001"), id);
-    //     } catch (Exception ex) {
-    //         DroneConstraintKey key = DroneBaseException.contraintKey(ex);
-    //         return SuccessResponse.fail(CustomMessages.message(key.toString()));
-    //     }
-    // }
-
 }

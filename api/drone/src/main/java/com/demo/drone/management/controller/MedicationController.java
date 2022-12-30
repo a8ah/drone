@@ -34,16 +34,16 @@ public class MedicationController extends AbstractController {
         }
     }
 
-    @PostMapping("search_enabled")
-    public SuccessResponse search(@RequestParam(required = false, defaultValue = "0") Integer page,
-            @RequestParam(required = false, defaultValue = "10") Integer size) {
-        try {
-            Page<MedicationProjection> medicatios = medicationProcess.getAllEnabledMedication(page, size);
-            return new SuccessResponse(Boolean.TRUE, null, medicatios);
-        } catch (Exception ex) {
-            return SuccessResponse.fail(ex);
-        }
-    }
+    // @PostMapping("search_enabled")
+    // public SuccessResponse search(@RequestParam(required = false, defaultValue = "0") Integer page,
+    //         @RequestParam(required = false, defaultValue = "10") Integer size) {
+    //     try {
+    //         Page<MedicationProjection> medicatios = medicationProcess.getAllEnabledMedication(page, size);
+    //         return new SuccessResponse(Boolean.TRUE, null, medicatios);
+    //     } catch (Exception ex) {
+    //         return SuccessResponse.fail(ex);
+    //     }
+    // }
 
     @PostMapping
     public SuccessResponse create(@RequestBody @Valid MedicationCreateDto entity) throws Exception {

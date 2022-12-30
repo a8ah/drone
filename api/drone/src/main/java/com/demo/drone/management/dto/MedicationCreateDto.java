@@ -13,6 +13,7 @@ public class MedicationCreateDto {
     @Size(min = 2, max = 15)
     @MedicationName
     private String name;
+    
     @NotNull(message = "The item code is required!")
     @MedicationCode
     private String code;

@@ -5,7 +5,6 @@ import com.demo.drone.data.common.exception.DroneBaseException;
 import com.demo.drone.data.common.model.CustomMessages;
 import com.demo.drone.data.common.model.DroneConstraintKey;
 import com.demo.drone.data.common.tools.SuccessResponse;
-import com.demo.drone.data.management.model.State;
 import com.demo.drone.management.dto.DroneCreateDto;
 import com.demo.drone.management.dto.DroneEditDto;
 import com.demo.drone.management.process.DroneProcess;

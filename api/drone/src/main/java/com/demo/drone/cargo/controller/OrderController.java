@@ -31,17 +31,6 @@ public class OrderController extends AbstractController {
         }
     }
 
-    // @PostMapping("search_enabled")
-    // public SuccessResponse search(@RequestParam(required = false, defaultValue = "0") Integer page,
-    //         @RequestParam(required = false, defaultValue = "10") Integer size) {
-    //     try {
-    //         Page<MedicationProjection> medicatios = medicationProcess.getAllEnabledMedication(page, size);
-    //         return new SuccessResponse(Boolean.TRUE, null, medicatios);
-    //     } catch (Exception ex) {
-    //         return SuccessResponse.fail(ex);
-    //     }
-    // }
-
     @PostMapping
     public SuccessResponse create(@RequestBody  Map<String,Object> entity) throws Exception {
         try {
@@ -54,27 +43,5 @@ public class OrderController extends AbstractController {
         }
     }
 
-    // @PutMapping("{id}")
-    // public SuccessResponse edit(@PathVariable String id, @RequestBody @Valid MedicationCreateDto entity)
-    //         throws DroneBaseException {
-    //     try {
-    //         return new SuccessResponse(Boolean.TRUE, null, medicationProcess.editMedication(id, entity));
-    //     } catch (Exception ex) {
-    //         DroneConstraintKey key = DroneBaseException.contraintKey(ex);
-    //         return SuccessResponse.fail(CustomMessages.message(key.toString()));
-    //     }
-
-    // }
-
-    // @DeleteMapping("{id}")
-    // public SuccessResponse delete(@PathVariable String id) throws Exception {
-    //     try {
-    //         medicationProcess.deleteMedication(id);
-    //         return new SuccessResponse(Boolean.TRUE, CustomMessages.message("MSMG001"), id);
-    //     } catch (Exception ex) {
-    //         DroneConstraintKey key = DroneBaseException.contraintKey(ex);
-    //         return SuccessResponse.fail(CustomMessages.message(key.toString()));
-    //     }
-    // }
 
 }

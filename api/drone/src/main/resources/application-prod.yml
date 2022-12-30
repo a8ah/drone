@@ -1,0 +1,19 @@
+server:
+  port: 7500
+spring:
+  sql:
+    init:
+      platform: postgres
+      encoding: UTF-8
+  datasource:
+    url: jdbc:postgresql://localhost:6543/musala_drone
+    username: postgres
+    password: postgres
+  jpa:
+    show_sql: true
+    hibernate:
+      ddl-auto: validate #   update/validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
